@@ -1,0 +1,29 @@
+# --- Python / notebooks ---
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- Spark / Delta local artifacts (never commit data outputs) ---
+spark-warehouse/
+metastore_db/
+derby.log
+*.crc
+_delta_log/
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Secrets: never commit tokens or connection strings ---
+*.env
+.env
+*.pat
+secrets/
+
+# NOTE: the raw CSV under data/ IS committed on purpose — it is the small,
+# anonymized case-study input and makes the repo self-contained/reproducible.
+# Do NOT add real production exports here.
