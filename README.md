@@ -117,8 +117,11 @@ that Spark SQL would also work, but consistency aids readability.
 
 ## How the solution should be reviewed
 
-1. Run the notebooks in order: `01_bronze_ingestion` → `02_silver_cleaning` →
-   `03_gold_star_schema`. Each `# CELL ----` block maps to one Fabric notebook cell.
+1. Start with `00_data_exploration` (read-only) to see the profiling that
+   justifies the cleaning rules, the composite key, and the choice of
+   `created_date`. Then run the pipeline in order: `01_bronze_ingestion` →
+   `02_silver_cleaning` → `03_gold_star_schema`. Each `# CELL ----` block maps to
+   one Fabric notebook cell.
 2. Each notebook contains **assertions / quality gates that fail loudly** — a green run is
    itself evidence of correctness (row counts, unique keys, non-null critical fields).
 3. The decisive check is **conservation**: the bug count in Gold must equal the bug count
@@ -161,6 +164,7 @@ fabric-bug-metrics/
 ├─ data/
 │  └─ brnz_azdo_workitems_current_anonymized.csv.csv   anonymized case-study input
 └─ notebooks/
+   ├─ 00_data_exploration.py    read-only profiling of the raw data (run first)
    ├─ 01_bronze_ingestion.py
    ├─ 02_silver_cleaning.py
    └─ 03_gold_star_schema.py
